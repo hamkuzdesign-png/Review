@@ -8,7 +8,18 @@ const MAX_DOM_NODES = 2000;
  * tsconfig only supplies types here, nothing is polyfilled at runtime.
  */
 function collectDomNodes(maxNodes: number): DomNode[] {
-  function rgbStringToHex(rgbString: string): string | undefined {
+  // tsx runs esbuild with keepNames on, which wraps every named function/arrow
+  // binding in this body (rgbStringToHex, parsePx, toHex below) in a call to a
+  // `__name(fn, "name")` helper it injects at the *top of the compiled module*
+  // — not inside this function. Playwright's page.evaluate sends only this
+  // function's own stringified source into the page, so that outer helper
+  // isn't there and the bare `__name(...)` calls throw a ReferenceError. This
+  // line is a plain assignment (not a declaration), so esbuild has no name to
+  // preserve on it and leaves it alone — it just makes the free variable
+  // `__name` that the wrapped calls below reference resolve to a no-op.
+  (window as unknown as { __name?: (fn: unknown) => unknown }).__name ??= (fn) => fn;
+
+  const rgbStringToHex = (rgbString: string): string | undefined => {
     const match = rgbString.match(/rgba?\(([^)]+)\)/);
     if (!match) return undefined;
     const parts = match[1].split(",").map((p) => parseFloat(p.trim()));
@@ -16,12 +27,12 @@ function collectDomNodes(maxNodes: number): DomNode[] {
     if (a === 0) return undefined;
     const toHex = (v: number) => Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, "0");
     return `#${toHex(r)}${toHex(g)}${toHex(b)}`.toUpperCase();
-  }
+  };
 
-  function parsePx(value: string): number {
+  const parsePx = (value: string): number => {
     const n = parseFloat(value);
     return Number.isFinite(n) ? n : 0;
-  }
+  };
 
   const results: DomNode[] = [];
   const all = document.body.querySelectorAll("*");
