@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: figma-design-diff-backend
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production

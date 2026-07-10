@@ -1,0 +1,13 @@
+{
+  "name": "figma-design-diff",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace=packages/shared && npm run build --workspace=packages/server && npm run build --workspace=packages/plugin",
+    "dev:server": "npm run dev --workspace=packages/server",
+    "dev:plugin": "npm run watch --workspace=packages/plugin"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "types": ["@figma/plugin-typings"],
+    "lib": ["ES2020", "DOM"],
+    "noEmit": true,
+    "paths": {
+      "@app/shared": ["../shared/src/types.ts"]
+    }
+  },
+  "include": ["src"]
+}

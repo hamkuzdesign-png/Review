@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "plugin-ui-preview",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "serve", "packages/plugin/dist", "-l", "4519"],
+      "port": 4519
+    },
+    {
+      "name": "backend-server",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev:server"],
+      "port": 4517
+    }
+  ]
+}
