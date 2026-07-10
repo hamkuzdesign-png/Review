@@ -3,7 +3,7 @@ services:
     name: figma-design-diff-backend
     runtime: docker
     dockerfilePath: ./Dockerfile
-    plan: starter
+    plan: free
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
