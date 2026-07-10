@@ -18,7 +18,7 @@ COPY packages/server packages/server
 # base-image tag).
 RUN npx --prefix packages/server playwright install --with-deps chromium
 
-RUN npm run build --workspace=packages/shared && npm run build --workspace=packages/server
+RUN npm run build --workspace=packages/server
 
 ENV NODE_ENV=production
 EXPOSE 4517
