@@ -10,11 +10,11 @@ const watch = process.argv.includes("--watch");
 mkdirSync(path.join(root, "dist"), { recursive: true });
 
 // Figma plugin UI can't read a .env file at runtime, so the backend base URL
-// is baked in at build time: `npm run watch` (local dev) defaults to the
-// local server, while `npm run build` (what actually ships to Figma) defaults
-// to the deployed Render backend. Override with BACKEND_URL=... for a custom
-// deployment.
-const BACKEND_URL = process.env.BACKEND_URL || (watch ? "http://localhost:4517" : "https://158.160.181.118.nip.io");
+// is baked in at build time. This plugin is local-only: the backend always
+// runs on the same machine as Figma, so both `npm run watch` and `npm run
+// build` default to localhost. Override with BACKEND_URL=... only if you're
+// pointing at a non-default local port.
+const BACKEND_URL = process.env.BACKEND_URL || "http://localhost:4517";
 
 // Figma plugin UI is a single inline HTML string (figma.showUI(__html__)) with
 // no ability to fetch its own asset files at runtime, so the brand fonts have
