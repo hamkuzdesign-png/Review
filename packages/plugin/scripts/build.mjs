@@ -14,7 +14,7 @@ mkdirSync(path.join(root, "dist"), { recursive: true });
 // local server, while `npm run build` (what actually ships to Figma) defaults
 // to the deployed Render backend. Override with BACKEND_URL=... for a custom
 // deployment.
-const BACKEND_URL = process.env.BACKEND_URL || (watch ? "http://localhost:4517" : "https://figma-design-diff-backend.onrender.com");
+const BACKEND_URL = process.env.BACKEND_URL || (watch ? "http://localhost:4517" : "https://158.160.181.118.nip.io");
 
 // Figma plugin UI is a single inline HTML string (figma.showUI(__html__)) with
 // no ability to fetch its own asset files at runtime, so the brand fonts have

@@ -6,7 +6,7 @@
   "ui": "dist/ui.html",
   "editorType": ["figma"],
   "networkAccess": {
-    "allowedDomains": ["https://figma-design-diff-backend.onrender.com"],
+    "allowedDomains": ["https://158.160.181.118.nip.io"],
     "devAllowedDomains": ["http://localhost:4517"]
   }
 }
